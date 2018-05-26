@@ -1,0 +1,10 @@
+export function startLogin(){
+    return {type: START_LOGIN};
+}
+
+export function logged(user){
+    return {
+	type: "LOGGED",
+	payload: user
+    }
+}

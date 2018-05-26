@@ -1,0 +1,7 @@
+export function errorAction(error){
+    return {
+	type: "ERROR",
+	payload: error
+    }
+}
+    

@@ -1,0 +1,3 @@
+const fetchReducer=(state=false,action){
+    return state;
+}
