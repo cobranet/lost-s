@@ -1,0 +1,58 @@
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
+import GCard from './GCard';
+const styles= theme => ({
+    dicards: {
+    },
+    played: {
+    }
+
+});
+
+const colors = [ 0,1,2,3,4 ];
+export default withStyles(styles)(class Played extends Component {
+
+    render(){
+	const { classes,played,onPlay } = this.props;
+	console.log(this.props.played[0]);
+	return (
+	    <div>
+	    <div className={classes.played}>
+	      { colors.map( (color,index)=>
+			    0  === 0 ?
+		      <GCard  key={color}
+                     		  id ={color}
+				  x={300} y={10+80*index}
+				  size={50}
+			          color={color}
+			          value={-2}
+			          placeholder={1}
+				  onCardClick={ ()=> onPlay(color) }/> :
+		       <GCard  key={color}
+                     		  id ={color}
+				  x={300} y={10+80*index}
+				  size={50}
+			          color={color}
+			          value={-2}
+			          placeholder={1}
+				  onCardClick={ ()=> onPlay(color) }/>
+			    
+			  )}
+	    </div>
+	    <div className={classes.played}>
+	      { colors.map( (color,index)=>
+		      <GCard  key={color}
+                     		  id ={color}
+				  x={500} y={10+80*index}
+				  size={50}
+			          color={color}
+			          value={-2}
+			          placeholder={1}
+			          onCardClick={()=>{}} /> 
+			    
+			  )}
+	    </div>
+	    </div>
+	);
+    }
+});

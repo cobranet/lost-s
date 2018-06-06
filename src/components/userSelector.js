@@ -20,7 +20,7 @@ export default withStyles(styles)(class UserSelector extends Component {
 		  }}
 		  >
 		  { this.props.users.map((user)=> 
-					 <option value={user.uid} >
+					 <option key={user.uid} value={user.uid} >
 					       {user.name}
 					 </option>
     		  )}

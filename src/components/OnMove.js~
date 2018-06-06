@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+import { withStyles} from '@material-ui/core/styles';
+import {Grid,Paper,Avatar} from '@material-ui/core';
+const coef = 88/56;
+const styles = theme => ({
+    card : {
+	borderRadius: "5px ",
+	backgroundColor: "white",
+	padding: 5,
+    },
+    onMove: {
+	
+    }
+    
+    
+
+});
+
+
+
+export default withStyles(styles)(class OnMove extends Component {
+    render (){
+	const {classes} = this.props;
+	const { playerA,playerB,onMove } = this.props;
+	
+	return(
+	    <Paper className={classes.card}>
+	      <Grid container xs={12}>
+		<Grid  item xs={4} >
+		    <Avatar key={1} src={onMove.image}/>
+		  </Grid>
+		<Grid container xs={8}>
+		  <Grid item xs={4}>
+		    <Avatar key={2} src={playerA.image}/>
+		  </Grid>
+		  <Grid item xs={4}>
+		    <Avatar key={3} src={playerB.image}/>
+		  </Grid>
+		</Grid>
+	      </Grid>
+	    </Paper>
+	);
+    }
+});

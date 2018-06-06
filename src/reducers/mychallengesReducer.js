@@ -1,0 +1,21 @@
+const mychallengesReducer=(state=[],action)=>{
+    switch(action.type){
+    case "MY_CHALLENGES": {
+	return action.payload
+    }
+    case "REMOVE_CHALLENGE": {
+	return state.filter((data)=>{return data.challenge.id !== action.payload.id });
+    }
+    case "HAVE_CHALLENGE":{
+	const challenge = action.payload;
+ 	return [...state.filter((data)=>{return data.challenge.id !== challenge.id;}), action.payload]
+    }
+    default: {
+	return state;
+    }
+    }
+}
+
+export default mychallengesReducer;
+
+    

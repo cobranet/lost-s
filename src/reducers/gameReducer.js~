@@ -1,0 +1,11 @@
+const gameReducer=(state={}, action)=>{
+    switch(action.type){
+    case "NEW_GAME": {
+	return JSON.parse(action.payload);
+	break;
+    }
+    default: {
+	return state;
+    }
+    }
+}

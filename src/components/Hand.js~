@@ -1,0 +1,28 @@
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles= theme => ({
+    paper: {
+      padding: 10,
+	margin: 10,
+        flexGrow: 1,
+	minHeight: 400,
+	minWidth: 600,
+	backgroundColor: "lightGrey",
+	position: "absolute",	
+    },
+
+});
+export default withStyles(styles)(class Hand extends Component {
+    render(){
+	return (
+	    <Grid item xs={12}>
+	      <Paper  className={classes.paper} >
+		<GCard x={30} y={60}   size={100} color={0} value={2} />
+		<GCard  x={60} y={60}   size={100} color={1} value={7} />
+		<GCard  x={90} y={60}   size={100} color={1} value={10} />
+	      </Paper>
+      	    </Grid>
+	);
+    }
+});

@@ -1,8 +1,25 @@
-const userReducer=(state={},action)=>{
+const userReducer=(state={reconnect:false},action)=>{
     switch (action.type){
     case "LOGGED": {
-	return action.payload;
+	return Object.assign( {},action.payload,{reconnect: true});
     }
+    case "ACCEPT_CHALLENGE": {
+	return Object.assign( {},state,{status: "GAME" })
+    }
+    case "CHALLENGE_REFUSED": {
+	return Object.assign( {},state,{status: "WAITING" })
+    }
+	
+    case "CHALLENGE":
+	if ( action.payload.main) {
+	    return Object.assign( {},state,{status: "CHALLENGE" })
+	}
+        else {
+	    return state.status === "CHALLENGE" ?
+		Object.assign( {},state,{status: "WAITING" }):
+	        state;
+	}
+		
     default:
 	return state;
     }	

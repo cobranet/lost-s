@@ -1,0 +1,23 @@
+import React, {Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
+import {Avatar,List,ListSubheader,ListItemText,ListItem} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+
+const styles = theme => (
+    {
+	root: {
+	    width: '100%',
+	    maxWidth: 360,
+	    backgroundColor: theme.palette.background.paper,
+	    border: "1px solid black",
+	}
+    }
+);
+
+
+export default withStyles(styles)(class Challenge extends Component {
+    render(){
+	const {classes,challenge} = this.props; 
+	return ( <div>Challenge</div> )
+    }
+});

@@ -9,9 +9,7 @@ import fetchReducer from './reducers/fetchReducer';
 import errorReducer from './reducers/errorReducer';
 import websocketReducer from './reducers/websocketReducer';
 import freePlayers from './reducers/freePlayers';
-import challengeReducer from './reducers/challengeReducer';
-import mychallengesReducer from './reducers/mychallengesReducer';
-import gameReducer from './reducers/gameReducer';
+
 
 
 
@@ -24,19 +22,33 @@ const reducers = combineReducers({
     him: himReducer,
     error: errorReducer,
     websocket: websocketReducer,
-    freeplayers: freePlayers,
-    challenge: challengeReducer,
-    mychallenges: mychallengesReducer,
-    game: gameReducer,
+    freeplayers: freePlayers
 })
 
 
 
 
-const middleware = applyMiddleware(thunk,logger);
+const middleware = applyMiddleware(logger,thunk);
 
 const initialState = {fetch:false}
 
 const store = createStore(reducers,initialState,middleware)
+
+// store.subscribe( ()=> {
+//     console.log(store.getState());
+// })
+
+// store.dispatch((dispatch)=>{    
+//     dispatch({type:"START_LOGIN"});
+
+//     fetch("http://localhost:8080/api/player",
+// 	  { method: "POST",
+// 	    headers: headers,
+// 	    body: JSON.stringify({uid: "199734644140144",image: "./images/users/maka.jpg", name:"Marija Petrovic"})})
+// 	.then((response)=> response.json())
+// 	.then((data)=> dispatch({type:"LOGGED",payload:data}))
+// 	.catch((error)=> dispatch({type:"ERROR",payload:error}));
+// });
+
 
 export default store;
