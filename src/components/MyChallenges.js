@@ -30,7 +30,7 @@ export default withStyles(styles)(class MyChallenges extends Component {
 					  <Avatar alt={c.main.name} src={c.main.image} />
 					</IconButton>
 					<IconButton>
-					      <RemoveIcon />
+					      <RemoveIcon onClick={()=>refuseChallenge(c.challenge.id)} />
 					      </IconButton>
 				</ListItem>);
 			    })}

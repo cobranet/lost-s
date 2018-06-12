@@ -9,6 +9,9 @@ const userReducer=(state={reconnect:false},action)=>{
     case "CHALLENGE_REFUSED": {
 	return Object.assign( {},state,{status: "WAITING" })
     }
+    case "CHALLENGE_ACCEPTED": {
+	return Object.assign( {},state,{status: "GAME" })
+    }
 	
     case "CHALLENGE":
 	if ( action.payload.main) {

@@ -1,5 +1,9 @@
 const challengeReducer=(state={},action)=>{
     switch(action.type){
+    case "CHALLENGE_ACCEPTED" : {
+	return {}
+    }
+    
     case "CHALLENGE_REFUSED": {
 	return {};
     }

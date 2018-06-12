@@ -12,6 +12,8 @@ import Hand from './components/Hand.js';
 import {connect} from 'react-redux';
 import SockJsClient from 'react-stomp';
 
+import * as conf from './conf';
+
 import * as useractions from './actions/userActions';
 import * as utilactions from './actions/utilActions';
 import * as freeplayersactions from './actions/freePlayers';
@@ -24,7 +26,7 @@ const  users = [ {uid: "199734644140144",image: "./images/users/maka.jpg", name:
 		 {uid: "117392552372115", image: "./images/users/pana.jpg",name:"Pana Petrovic"},
 		 {uid: "10212423291510705",image: "./images/users/braca.jpg",name: "Bratislav Petrovic"}];
 
-const url = 'http://localhost:8080/api';
+// const url = 'http://localhost:8080/api';
 
 const styles = theme => ({
     root : {
@@ -33,8 +35,8 @@ const styles = theme => ({
       padding: 10,
 	margin: 10,
         flexGrow: 1,
-	minHeight: 400,
-	minWidth: 600,
+	minHeight: 450,
+	minWidth: 1000,
 	backgroundColor: "lightGrey",
 	position: "absolute",	
     },
@@ -64,7 +66,6 @@ let App = withStyles(styles)(class App extends Component {
 	return this.props.game.decks.hands[0][index];
     }
     onPlay=(color)=>{
-	alert("Play");
 	if (this.props.game.selected === null ) {
 	    return;
 	}
@@ -76,11 +77,20 @@ let App = withStyles(styles)(class App extends Component {
 	this.props.dispatch(gameactions.playCard(this.props.user.uid,this.props.game.selected));
 	
     }
+    onDiscardDraw=(color)=>{
+	this.props.dispatch(gameactions.drawDiscard(this.props.user.uid,color));
+    }
     onDiscard=(color)=>{
+	if(this.props.game.onMove === 1) return;
+	this.props.game.mode === "PLAY" ? this.onDiscardPlay(color): this.onDiscardDraw(color);
+    }
+    
+    onDiscardPlay=(color)=>{
 	
 	if (this.props.game.selected === null ) {
 	    return;
 	}
+	if (this.props.game.mode !== "PLAY" ) return;
 	const card = this.getCard(this.props.game.selected);
 	if ( card.color !== color ){
 	    return;
@@ -88,8 +98,14 @@ let App = withStyles(styles)(class App extends Component {
 	this.props.dispatch(gameactions.discardCard(this.props.user.uid,this.props.game.selected));
 
     }
+    onDraw=()=>{
+	if ( this.props.game.onMove === 1 ) return;
+	if (this.props.game.mode !== "DRAW" ) return;
+	this.props.dispatch(gameactions.drawCard(this.props.user.uid));
+    }
     onCardClick=(card)=>{
-	if ( this.props.game.onMove === 1 ) return; 
+	if ( this.props.game.onMove === 1 ) return;
+	if (this.props.game.mode !== "PLAY" ) return;
 	this.props.dispatch(gameactions.selectCard(card));
     }
     acceptChallenge=(challengeId)=>{
@@ -154,6 +170,7 @@ let App = withStyles(styles)(class App extends Component {
 	                onCardClick={this.onCardClick}
                         onDiscard = {this.onDiscard}
 	                onPlay= {this.onPlay}
+	                onDraw= {this.onDraw}
 		/>;
 	    break;
         default:
@@ -165,7 +182,7 @@ let App = withStyles(styles)(class App extends Component {
 	      { user.reconnect ?
 		  
     		  <div>
-    			<SockJsClient url={url}
+    			<SockJsClient url={conf.url}
     			    topics={['/topic/' + user.uid , '/topic/loby' ] }
     			    onMessage={(msg) => { this.onMessage(msg) }}
     		    onConnect={()=> { this.connect();} }

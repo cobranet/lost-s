@@ -21,14 +21,14 @@ export default withStyles(styles)(class Discards extends Component {
 			    discards[index].length === 0 ?  	    
 		      <GCard  key={color}
                      		  id ={color}
-				  x={400} y={10+80*index}
+				  x={600} y={10+80*index}
 				  size={50}
 				  color={color}
 				  value={-2}
 				  onCardClick={ ()=> onDiscardClick(color) }/> :
 		      <GCard      key={color}
                      		  id ={discards[index][discards[index].length-1].id}
-				  x={400} y={10+80*index}
+				  x={600} y={10+80*index}
 				  size={50}
 				  color={discards[index][discards[index].length-1].color}
 				  value={discards[index][discards[index].length-1].value}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles} from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 const coef = 88/56;
 const styles = theme => ({
     card : {
@@ -15,7 +16,7 @@ const styles = theme => ({
 
 });
 
-const images = ["desert","ice","jungle","sea","volcano"];
+const images = ["desert","ice","jungle","sea","volcano","back"];
 
 export default withStyles(styles)(class GCard extends Component {
     
@@ -39,8 +40,8 @@ export default withStyles(styles)(class GCard extends Component {
 	    height: coef*size + 4*coef,
 	    borderRadius: 5,
 	    position: "absolute",
-	    left: x,
-	    top: y - 30,
+	    left: x + 30,
+	    top: y ,
 	    boxShadow: "1px 2px 0px 1px #888888",
 
 	};
@@ -51,11 +52,19 @@ export default withStyles(styles)(class GCard extends Component {
 	    marginTop: 2*coef,
 	    
 	};
-	const numStyle= {
+	const numStyleRight= {
+	    marginTop: -size*coef-2  ,
+	    marginLeft: 13,
+	    color: "white",
+	    fontSize: size / 3.5,
+	    textShadow: '-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000'
+	};
+	const numStyleLeft= {
 	    marginTop: -size*coef-2  ,
 	    marginLeft: 4,
 	    color: "white",
-	    fontSize: 30 
+	    fontSize: size / 3.5,
+	    textShadow: '-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000'
 	};
 
 	const img = placeholder ? classes.placeholder : classes.img; 
@@ -64,10 +73,18 @@ export default withStyles(styles)(class GCard extends Component {
 	return (
 	    <div onClick={ () => onCardClick(index) }  style={ selected ? cardStyleSelected : cardStyle}  className={classes.card}>
 	      <img alt={images[color]+value}  style={imgStyle} className={img} src={image}/>
-	      {selected}
-	      <div style={numStyle}>
-		{ value !== -1 ?  value === -2 ? "" : value  : "X" }
-              </div>
+	      <Grid container>
+		<Grid item xs={6}>
+		  <div style={numStyleLeft}>
+		    { value !== -1 ?  value === -2 ? "" : value  : "X" }
+		  </div>
+		</Grid>
+		<Grid item xs={6}>
+		  <div style={numStyleRight}>
+		    { value !== -1 ?  value === -2 ? "" : value  : "X" }
+		  </div>
+		</Grid>
+	      </Grid>
 	    </div>
 	);
     }
